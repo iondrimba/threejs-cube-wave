@@ -1,5 +1,9 @@
 sudo: required
 language: node_js
+
+rvm:
+  - 2.0.0
+
 before_install:
 - gem install sass
 - rvm install ruby-2.0.0-p598
