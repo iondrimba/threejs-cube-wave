@@ -1,0 +1,26 @@
+
+{
+	"globals": {
+	    "jQuery": false,
+	    "$": true
+	},
+	"extends": ["eslint:recommended"],
+	"env": {
+	    "browser": true,
+	    "es6": true,
+	    "node": true
+	},
+	"ecmaFeatures": {
+	    "arrowFunctions": true,
+	    "modules": true
+	},
+	"parserOptions": {
+	    "ecmaVersion": 6,
+	    "sourceType": "module"
+	},
+	"rules": {
+	    "eqeqeq": 1,
+	    "curly": 2,
+	    "quotes": [2, 'single']
+	}
+}

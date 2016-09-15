@@ -1,0 +1,22 @@
+init:
+  - git config --global core.autocrlf true
+environment:
+  matrix:
+    - nodejs_version: "4.2.2"
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - gem install sass
+  - gem install ruby 
+  - gem install scss_lint
+  - npm install -g npm
+  - npm install gulp -g
+  - npm install    
+  - npm install promise
+test_script:
+  - gulp deploy
+  - npm test 
+build: off
+matrix:
+  fast_finish: true
+cache:
+  - node_modules -> package.json
