@@ -1,8 +1,8 @@
-# ES6 Starter Project
+# ES6 Blank
 
-Ready to go ES6 project starter with Tests and Coverage.
+Ready to go ES6 Blank with Tests and Coverage.
 
-[![Travis build status](https://travis-ci.org/iondrimba/es6starterproject.svg?branch=master)](https://travis-ci.org/iondrimba/es6starterproject) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva/branch/master?svg=true)](https://ci.appveyor.com/project/iondrimba/es6starterproject/branch/master) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/es6starterproject/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/es6starterproject?branch=master)
+[![Travis build status](https://travis-ci.org/iondrimba/es6-blank.svg?branch=master)](https://travis-ci.org/iondrimba/es6-blank) [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva/branch/master?svg=true)](https://ci.appveyor.com/project/iondrimba/es6-blank/branch/master) [![Coverage Status](https://coveralls.io/repos/github/iondrimba/es6-blank/badge.svg?branch=master)](https://coveralls.io/github/iondrimba/es6-blank?branch=master)
 
 
 #### Requires:
@@ -13,7 +13,7 @@ Ready to go ES6 project starter with Tests and Coverage.
 ## Installation
 
 ```sh
- git clone https://github.com/iondrimba/es6starterproject.git 
+ git clone https://github.com/iondrimba/es6-blank.git
  cd es6starterproject
  npm install
  gulp
@@ -22,20 +22,17 @@ Ready to go ES6 project starter with Tests and Coverage.
 ### [Live demo]
 
 #### GOAL:
-Reduce time spent by developers looking to work today with all the new ES6 features, it also includes Tests and Coverage. I chose to leave it simple as possible (no MV* Framework dependency).
+Quick start ES6 template.
 
 
 #### TODO:
 
 * Write more tests
 
-![Alt text](picture.png)
-
 #### Features:
 
 * ES6 ready
 * SemVer (Automated package and files versioning)
-* Router system with pushstate (page.js)
 * Templating engine (handlebars.js)
 * Tests (Jasmine + karma)
 * Coverage (Coveralls)
@@ -54,9 +51,9 @@ Reduce time spent by developers looking to work today with all the new ES6 featu
 * ES6 transpile via Babel
 * BrowserSync
 * Browserify
-* Karma 
+* Karma
 * SemVer
-* Jasmine 
+* Jasmine
 * Code Coverage
 * Sass
 * ESLint
@@ -87,7 +84,7 @@ The task will:
 
 ````bash
 ├── public/
-│    ├─── css/ 
+│    ├─── css/
 │    ├─── js/
 │    ├─── images/
 │    ├─── .htaccess
@@ -98,16 +95,10 @@ The task will:
 │── src/
 │    ├── images/
 │    ├── scripts/
-│	   │    ├─── core/ 
 │	   │    ├─── models/
-│	   │    ├─── partials/
-│	   │    ├─── views
 │	   │    └─── app.js
 │	   │
 │	   ├── scss/
-│	   │    ├─── components/ 
-│	   │    ├─── partials/
-│	   │    ├─── views/
 │	   │    └─── app.scss
 │	   │
 │    └── templates/
@@ -125,4 +116,4 @@ The task will:
 ````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
-[Live demo]:<http://iondrimba.github.io/es6starterproject/>
+[Live demo]:<http://iondrimba.github.io/es6-blank/>
