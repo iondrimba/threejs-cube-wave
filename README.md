@@ -14,7 +14,7 @@ Ready to go ES6 Blank with Tests and Coverage.
 
 ```sh
  git clone https://github.com/iondrimba/es6-blank.git
- cd es6starterproject
+ cd es6-blank
  npm install
  gulp
 ```
