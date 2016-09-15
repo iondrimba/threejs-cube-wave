@@ -1,10 +1,8 @@
 sudo: required
 language: node_js
-node_js:
-- '4.2.2'
 before_install:
 - gem install sass
-- source ~/.rvm/scripts/rvm && rvm use 2.0.0
+- rvm install ruby-2.0.0-p598
 - gem install scss_lint
 - npm install -g npm
 - npm install promise
