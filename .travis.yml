@@ -4,7 +4,7 @@ node_js:
 - '4.2.2'
 before_install:
 - gem install sass
-- gem install ruby 2
+- source ~/.rvm/scripts/rvm && rvm use 2.0.0
 - gem install scss_lint
 - npm install -g npm
 - npm install promise
