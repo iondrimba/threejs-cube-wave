@@ -6,7 +6,7 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - gem install sass
-  - gem install ruby -v '>=2'
+  - gem install ruby 2
   - gem install scss_lint
   - npm install -g npm
   - npm install gulp -g

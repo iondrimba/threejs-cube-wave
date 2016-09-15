@@ -4,7 +4,7 @@ node_js:
 - '4.2.2'
 before_install:
 - gem install sass
-- gem install ruby -v '>=2'
+- gem install ruby 2
 - gem install scss_lint
 - npm install -g npm
 - npm install promise
