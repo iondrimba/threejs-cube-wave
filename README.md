@@ -25,10 +25,6 @@ Ready to go ES6 Blank with Tests and Coverage.
 Quick start ES6 template.
 
 
-#### TODO:
-
-* Write more tests
-
 #### Features:
 
 * ES6 ready
