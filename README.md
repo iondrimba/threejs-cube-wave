@@ -39,9 +39,6 @@ Quick start ES6 template.
 * CI (Travis)
 * Module system CommonJs (browserify)
 
-> In order to test if Pushstate is working
-> you have to host it on apache so it can reads the .htaccess file
-
 #### Testing:
 
 * $ npm test
