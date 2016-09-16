@@ -29,7 +29,6 @@ Quick start ES6 template.
 
 * ES6 ready
 * SemVer (Automated package and files versioning)
-* Templating engine (handlebars.js)
 * Tests (Jasmine + karma)
 * Coverage (Coveralls)
 * CI (Travis)
