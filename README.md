@@ -19,8 +19,6 @@ Ready to go ES6 Blank with Tests and Coverage.
  gulp
 ```
 
-### [Live demo]
-
 #### GOAL:
 Quick start ES6 template.
 
@@ -71,41 +69,6 @@ The task will:
 1. Rename the file app.js to app.version.js
 2. Rename the file app.css to app.version.css
 3. Will update the index.html with the new file references.
-
-#### Structure:
-
-````bash
-├── public/
-│    ├─── css/
-│    ├─── js/
-│    ├─── images/
-│    ├─── .htaccess
-│    └─── index.html
-│
-│── spec/(jasmine spec files)
-│
-│── src/
-│    ├── images/
-│    ├── scripts/
-│	   │    ├─── models/
-│	   │    └─── app.js
-│	   │
-│	   ├── scss/
-│	   │    └─── app.scss
-│	   │
-│    └── templates/
-│
-│── tasks/
-│
-│── .gitignore
-│── .travis.yml
-│── gulpfile.js
-│── karma.conf.js
-│── LICENSE
-│── lint.yml
-│── package.json
-└── README.md
-````
 
 [scss-lint]:<https://github.com/brigade/scss-lint#installation>
 [Live demo]:<http://iondrimba.github.io/es6-blank/>
