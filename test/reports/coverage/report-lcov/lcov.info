@@ -1,5 +1,5 @@
 TN:
-SF:/Users/ion/Documents/es6-blank/src/scripts/app.js
+SF:C:\Users\Ion\es6-blank\src\scripts\app.js
 FN:7,_interopRequireDefault
 FN:9,_classCallCheck
 FN:11,App
@@ -28,7 +28,7 @@ BRF:6
 BRH:4
 end_of_record
 TN:
-SF:/Users/ion/Documents/es6-blank/spec/homeModelSpec.js
+SF:C:\Users\Ion\es6-blank\spec\homeModelSpec.js
 FN:7,_interopRequireDefault
 FN:9,(anonymous_2)
 FN:13,(anonymous_3)
@@ -54,7 +54,7 @@ BRF:4
 BRH:3
 end_of_record
 TN:
-SF:/Users/ion/Documents/es6-blank/src/scripts/models/home-model.js
+SF:C:\Users\Ion\es6-blank\src\scripts\models\home-model.js
 FN:7,_classCallCheck
 FN:9,HomeModel
 FNF:2
