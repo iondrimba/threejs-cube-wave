@@ -1,5 +1,5 @@
 # Threejs Cube Wave
 
-Live Demo http://iondrimba.github.io/threejs-cube-wave/public
+Live Demo https://iondrimba.github.io/threejs-cube-wave/public/index.html
 
 ![App](https://raw.githubusercontent.com/iondrimba/images/master/cubewave.jpg)
