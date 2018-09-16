@@ -1,14 +1,14 @@
 {
-  "name": "es6-blank",
+  "name": "threejs-cannonjs-demo",
   "version": "1.0.0",
-  "description": "Ready to go ES6 blank config.",
+  "description": "ThreeJs + CannonJs Demo",
   "main": "src/index.js",
   "keywords": [
     "ES6"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iondrimba/es6-blank.git"
+    "url": "git+https://github.com/iondrimba/threejs-cannonjs-demo.git"
   },
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
@@ -37,5 +37,8 @@
     "webpack-dev-server": "^3.1.8",
     "webpack-merge": "^4.1.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "three": "^0.96.0",
+    "threejs-controls": "^1.0.6"
+  }
 }

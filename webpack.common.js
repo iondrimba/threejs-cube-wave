@@ -34,6 +34,9 @@ module.exports = {
       }
     }),
     new CleanWebpackPlugin(['public']),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html'
+    }),
   ]
 };
