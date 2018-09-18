@@ -2,4 +2,4 @@
 
 Live Demo https://iondrimba.github.io/threejs-cube-wave/public/index.html
 
-![App](https://raw.githubusercontent.com/iondrimba/images/master/cubewave.jpg)
+![App](https://github.com/iondrimba/images/blob/master/cubewave.gif)
