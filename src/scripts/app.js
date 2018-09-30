@@ -7,7 +7,7 @@ export default class App {
     this.spotLightColor = 0xffffff;
     this.boxColor = 0x1a63ed;
     this.angle = 0;
-    this.gridSize = 24;
+    this.gridSize = 30;
     this.col = this.gridSize
     this.row = this.gridSize;
     this.velocity = .1;
@@ -21,11 +21,13 @@ export default class App {
     this.scene.background = new THREE.Color(this.backgroundColor);
 
     this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    this.camera.position.set(17.7, 25.3, -17.9);
-
-    this.controls = new THREE.OrbitControls(this.camera);
+    this.camera.position.set(-19.19, 23.52, -18.76);
 
     this.addRenderer();
+
+    document.body.appendChild(this.renderer.domElement);
+
+    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 
     this.addAmbientLight();
 
@@ -44,9 +46,9 @@ export default class App {
 
   addGUIControls() {
     this.gui = new dat.GUI();
-    this.gui.add(this, 'amplitude', -1, 1);
+    this.gui.add(this, 'amplitude', -10, .2);
     this.gui.add(this, 'velocity', 0, .5);
-    this.gui.add(this, 'waveLength', 0, 500);
+    this.gui.add(this, 'waveLength', 100, 500);
     this.controller = this.gui.add(this, 'gridSize', 24, 50);
 
     this.controller.onFinishChange((value) => {
@@ -66,8 +68,6 @@ export default class App {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-    document.body.appendChild(this.renderer.domElement);
   }
 
   addAmbientLight() {
@@ -93,11 +93,24 @@ export default class App {
   }
 
   addBoxes(scene) {
+    const size = 1;
+    const height = 5;
+    const geometry = new THREE.BoxGeometry(size, height, size);
+    const material = new THREE.MeshPhysicalMaterial({
+      color: this.boxColor,
+      emissive: 0x0,
+      roughness: .5,
+      metalness: .1,
+      reflectivity: .5
+    });
+
     for (let i = 0; i < this.col; i++) {
       this.boxes[i] = [];
 
       for (let j = 0; j < this.row; j++) {
-        const box = this.getBox();
+        const box = this.getBox(geometry, material);
+
+        box.position.y = height * .5;
         box.scale.set(1, 0.001, 1);
 
         this.boxes[i][j] = box;
@@ -113,7 +126,8 @@ export default class App {
     for (let i = 0; i < this.col; i++) {
       for (let j = 0; j < this.row; j++) {
         const distance = this.distance(j, i, this.row * .5, this.col * .5);
-        let offset = this.map(distance, 0, this.waveLength, -100, 100);
+
+        const offset = this.map(distance, 0, this.waveLength, -100, 100);
 
         const angle = this.angle + offset;
 
@@ -146,23 +160,15 @@ export default class App {
     this.scene.add(this.floor);
   }
 
-  getBox() {
-    const size = 1;
-    const geometry = new THREE.BoxGeometry(size, 5, size);
-    const material = new THREE.MeshPhysicalMaterial({
-      color: this.boxColor,
-      emissive: 0x0,
-      roughness: .5,
-      metalness: .1,
-      reflectivity: .5
-    });
-
+  getBox(geometry, material) {
     const box = new THREE.Mesh(geometry, material);
+
     box.castShadow = true;
     box.receiveShadow = true;
     box.position.y = 2.5;
 
     const pivot = new THREE.Object3D();
+
     pivot.add(box);
 
     return pivot;
