@@ -95,7 +95,7 @@ export default class App {
   addBoxes(scene) {
     const size = 1;
     const height = 5;
-    const geometry = new THREE.BoxGeometry(size, height, size);
+    const geometry = new THREE.BoxBufferGeometry(size, height, size);
     const material = new THREE.MeshPhysicalMaterial({
       color: this.boxColor,
       emissive: 0x0,
@@ -147,7 +147,7 @@ export default class App {
   }
 
   addFloor() {
-    const planeGeometry = new THREE.PlaneGeometry(500, 500);
+    const planeGeometry = new THREE.PlaneBufferGeometry(500, 500);
     const planeMaterial = new THREE.ShadowMaterial({ opacity: .35 });
 
     this.floor = new THREE.Mesh(planeGeometry, planeMaterial);
