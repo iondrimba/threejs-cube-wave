@@ -20,8 +20,8 @@ export default class App {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(this.backgroundColor);
 
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-    this.camera.position.set(-19.19, 23.52, -18.76);
+    this.camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 1000);
+    this.camera.position.set(100, 100, -100);
 
     this.addRenderer();
 
