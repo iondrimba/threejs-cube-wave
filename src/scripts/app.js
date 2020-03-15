@@ -2,6 +2,10 @@ import 'styles/index.scss';
 
 export default class App {
   init() {
+    this.stats = new Stats();
+    this.stats.showPanel(0);
+    document.body.querySelector('.stats').appendChild(this.stats.domElement);
+
     this.backgroundColor = 0xed1a21;
     this.ambientLightColor = 0xffffff;
     this.spotLightColor = 0xffffff;
@@ -15,13 +19,13 @@ export default class App {
 
     this.amplitude = -1;
     this.frequency = 0;
-    this.waveLength = 150;
+    this.waveLength = 242;
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(this.backgroundColor);
 
     this.camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 1000);
-    this.camera.position.set(100, 100, -100);
+    this.camera.position.set(-100, 100, -100);
 
     this.addRenderer();
 
@@ -31,7 +35,7 @@ export default class App {
 
     this.addAmbientLight();
 
-    this.addSpotLight();
+    this.addDirectionalLight();
 
     this.addFloor();
 
@@ -44,12 +48,35 @@ export default class App {
     window.addEventListener('resize', this.onResize.bind(this));
   }
 
+  addDirectionalLight() {
+    this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    this.directionalLight.castShadow = true;
+    this.directionalLight.position.set(0, 1, 0);
+
+    this.directionalLight.shadow.camera.far = 1000;
+    this.directionalLight.shadow.camera.near = -100;
+
+    this.directionalLight.shadow.camera.left = -40;
+    this.directionalLight.shadow.camera.right = 40;
+    this.directionalLight.shadow.camera.top = 20;
+    this.directionalLight.shadow.camera.bottom = -20;
+    this.directionalLight.shadow.camera.zoom = 1;
+    this.directionalLight.shadow.camera.needsUpdate = true;
+
+    const targetObject = new THREE.Object3D();
+    targetObject.position.set(-50, -82, 40);
+    this.directionalLight.target = targetObject;
+
+    this.scene.add(this.directionalLight);
+    this.scene.add(this.directionalLight.target);
+  }
+
   addGUIControls() {
     this.gui = new dat.GUI();
     this.gui.add(this, 'amplitude', -10, .2);
     this.gui.add(this, 'velocity', 0, .5);
     this.gui.add(this, 'waveLength', 100, 500);
-    this.controller = this.gui.add(this, 'gridSize', 24, 50);
+    this.controller = this.gui.add(this, 'gridSize', 24, 150);
 
     this.controller.onFinishChange((value) => {
       this.gridSize = Math.floor(value);
@@ -83,11 +110,7 @@ export default class App {
   }
 
   clearScene() {
-    for (let i = 0; i < this.col; i++) {
-      for (let j = 0; j < this.row; j++) {
-        this.scene.remove(this.boxes[i][j]);
-      }
-    }
+    this.scene.remove(this.mesh);
 
     this.boxes = [];
   }
@@ -95,45 +118,52 @@ export default class App {
   addBoxes(scene) {
     const size = 1;
     const height = 5;
-    const geometry = new THREE.BoxBufferGeometry(size, height, size);
-    const material = new THREE.MeshPhysicalMaterial({
+    const material = new THREE.MeshLambertMaterial({
       color: this.boxColor,
-      emissive: 0x0,
-      roughness: .5,
-      metalness: .1,
-      reflectivity: .5
     });
+
+    const geometry = new THREE.BoxBufferGeometry(size, height, size);
+    geometry.translate( 0, 2.5, 0 );
+    this.mesh = this.getBox(geometry, material, this.row * this.col);
+    this.scene.add(this.mesh);
+
+    let ii = 0;
 
     for (let i = 0; i < this.col; i++) {
       this.boxes[i] = [];
 
       for (let j = 0; j < this.row; j++) {
-        const box = this.getBox(geometry, material);
+        const pivot = new THREE.Object3D();
+        this.boxes[i][j] = pivot;
 
-        box.position.y = height * .5;
-        box.scale.set(1, 0.001, 1);
+        pivot.scale.set(1, 0.001, 1);
+        pivot.position.set(i - this.gridSize * .5, height * .5, j - this.gridSize * .5);
 
-        this.boxes[i][j] = box;
-
-        box.position.set(i - this.gridSize * .5, 0, j - this.gridSize * .5);
-
-        scene.add(box);
+        pivot.updateMatrix();
+        this.mesh.setMatrixAt(ii++, pivot.matrix);
       }
     }
+
+    this.mesh.instanceMatrix.needsUpdate = true;
   }
 
   drawWave() {
+    let ii= 0;
+
     for (let i = 0; i < this.col; i++) {
       for (let j = 0; j < this.row; j++) {
         const distance = this.distance(j, i, this.row * .5, this.col * .5);
 
         const offset = this.map(distance, 0, this.waveLength, -100, 100);
-
         const angle = this.angle + offset;
-
         this.boxes[i][j].scale.y = this.map(Math.sin(angle), -1, -this.amplitude, 0.001, 1);
+
+        this.boxes[i][j].updateMatrix();
+        this.mesh.setMatrixAt(ii++, this.boxes[i][j].matrix);
       }
     }
+
+    this.mesh.instanceMatrix.needsUpdate = true;
 
     this.angle -= this.velocity;
   }
@@ -154,24 +184,19 @@ export default class App {
 
     planeGeometry.rotateX(- Math.PI / 2);
 
-    this.floor.position.y = 0;
+    this.floor.position.y = 2;
     this.floor.receiveShadow = true;
 
     this.scene.add(this.floor);
   }
 
-  getBox(geometry, material) {
-    const box = new THREE.Mesh(geometry, material);
+  getBox(geometry, material, count) {
+    const mesh = new THREE.InstancedMesh(geometry, material, count);
+    mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
 
-    box.castShadow = true;
-    box.receiveShadow = true;
-    box.position.y = 2.5;
-
-    const pivot = new THREE.Object3D();
-
-    pivot.add(box);
-
-    return pivot;
+    return mesh;
   }
 
   addGrid() {
@@ -187,11 +212,15 @@ export default class App {
   }
 
   animate() {
+    this.stats.begin();
+
     this.drawWave();
 
     this.controls.update();
 
     this.renderer.render(this.scene, this.camera);
+
+    this.stats.end();
 
     requestAnimationFrame(this.animate.bind(this));
   }
