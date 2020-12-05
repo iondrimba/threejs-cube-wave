@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -34,7 +35,16 @@ module.exports = {
       }
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['public'],
+      cleanOnceBeforeBuildPatterns: ['app.*'],
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/scripts/vendor/Stats.r16.min.js", to: "Stats.r16.min.js" },
+        { from: "./src/scripts/vendor/three.r123.min.js", to: "three.r123.min.js" },
+        { from: "./src/scripts/vendor/OrbitControls.js", to: "OrbitControls.js" },
+        { from: "./src/scripts/vendor/dat.0.7.2.gui.js", to: "dat.0.7.2.gui.js" },
+        { from: "./src/scripts/vendor/TweenMax.1.20.3.min.js", to: "TweenMax.1.20.3.min.js" },
+      ],
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
